@@ -1,0 +1,44 @@
+# This example shows how to use some of the disk source
+
+
+# Global parameters:
+Version               2.99
+Geometry              $(MEGALIB)/work_files/Practice/NaI_Tl.geo.setup
+
+#Check for overlaps
+#Random test points on each volume = 1000
+#Tolerated overlap 0.01 cm
+CheckForOverlaps 1000 0.01
+
+# Physics list
+PhysicsListEM                    LivermorePol
+
+# Output formats
+# Store only the HT data
+StoreSimulationInfo              false
+
+# Run & source parameters
+Run NaI_Tl_detector
+NaI_Tl_detector.FileName          NaI_Tl_detector
+#Stop the run after 10000 triggers
+NaI_Tl_detector.Triggers                100000
+
+NaI_Tl_detector.Source NaI_Tl_detectorSource
+NaI_Tl_detectorSource.ParticleType      1
+NaI_Tl_detectorSource.Beam              PointSource 1.5 0.0 -49.96
+NaI_Tl_detectorSource.Spectrum          Mono 661.67
+NaI_Tl_detectorSource.Flux              311227
+
+BeginComment
+//NaI_Tl_detector.Source NaI_Tl_detectorSource2
+//NaI_Tl_detectorSource2.ParticleType      1
+//NaI_Tl_detectorSource2.Beam              PointSource 1.5 0.0 -49.96
+//NaI_Tl_detectorSource2.Spectrum          Mono 1173.2
+//NaI_Tl_detectorSource2.Flux              703547
+
+//NaI_Tl_detector.Source NaI_Tl_detectorSource3
+//NaI_Tl_detectorSource3.ParticleType      1
+//NaI_Tl_detectorSource3.Beam              PointSource 1.5 0.0 -49.96
+//NaI_Tl_detectorSource3.Spectrum          Mono 1332.5
+//NaI_Tl_detectorSource3.Flux              703547
+EndComment

@@ -1,0 +1,159 @@
+// Lanthanum(III) bromide detector
+
+Name NaI_Tl
+Version 2.99
+
+SurroundingSphere 25.0 0.0 0.0 -2.54 25.0
+Include $(MEGALIB)/resource/examples/geomega/materials/Materials.geo
+// Universe volume
+Volume WorldVolume
+WorldVolume.Material Air
+WorldVolume.Shape BRIK 30 30 100
+WorldVolume.Visibility 0
+WorldVolume.Color 1
+WorldVolume.Mother 0
+
+//modeling a fake source
+//Position 3.0-1.0-0.5(the largest cylinder)
+//Volume source
+//source.Material Plywood
+//source.Shape SPHERE 0.0 1.0 0.0 180.0 0.0 360.0
+//source.Position 1.5 0.0 -49.96
+//source.Visibility 1
+//source.Color 5
+//source.Mother WorldVolume
+
+//modeling a Pb brick
+//xPosition 3.5-0.5 (the largest cylinder)
+//zposition -81.96+3.0 (I want the brick and source
+//1 meter away from the detector)
+Volume pb_brick
+pb_brick.Material Pb
+pb_brick.Shape BRIK 0.5 2.5 3.0
+pb_brick.Position 3.0 0.0 -96.96
+pb_brick.Visibility 1
+pb_brick.Color 6
+pb_brick.Mother WorldVolume
+
+//Volume of Board under detector
+//Position -50+18.04(the largest cylinder)
+Volume Table
+Table.Material Plywood
+Table.Shape BRIK 0.5 10.0 68.0
+Table.Position 4.0 0.0 -31.96
+Table.Visibility 1
+Table.Color 5
+Table.Mother WorldVolume
+
+//Volume of the Box
+//Building in the +x direction
+//x position 4.0 - 6.25
+//4.0 is the position of the plywood table
+Volume Base_outer
+Base_outer.Material Aluminium
+Base_outer.Shape BRIK 6.25 5.25 5.25
+Base_outer.Position -2.75 0.00 -2.54
+Base_outer.Visibility 1
+Base_outer.Color 12
+Base_outer.Mother WorldVolume
+
+//Volume of the inner box
+//Giving the Al shell a 0.05 cm thickness in y, z, and x
+//Also, 0.5 cm in x to account for the extra rectangular piece
+//Placing the air square inside the Base_outer
+//Position 4.0 -6.25 - 0.5 - 0.025
+//This will give it the extra 0.5cm on top and a thickness of
+//0.05cm in x
+Volume Base_inner
+Base_inner.Material Air
+Base_inner.Shape BRIK 6.20 5.225 5.225
+Base_inner.Position 0.0 0.0 0.00
+Base_inner.Visibility 1
+Base_inner.Color 4
+Base_inner.Mother Base_outer
+
+//Volume of the NaI detector
+//The crystal is not flush against the detector. It
+//is inside a little bit. If it was flush, the
+//Position 6.0 - 5.08 - 2.775
+Volume NaI_Tl_detector
+NaI_Tl_detector.Material NaI
+NaI_Tl_detector.Shape BRIK 5.08 5.08 5.08
+NaI_Tl_detector.Position 0.10 0.01 0.01
+NaI_Tl_detector.Visibility 1
+NaI_Tl_detector.Color 3
+NaI_Tl_detector.Mother Base_inner
+
+//Volume of Cylinder incasing the crystal
+//-6.25 - 2.75 - 1.75
+//The size of the box + its position + the height of the cylinder
+//The volume needs to be rotated
+Volume cylinder
+cylinder.Material Aluminium
+cylinder.Shape TUBE 3.95 4.0 1.75 0. 360.0
+cylinder.Position -10.75 0.0 -2.54
+cylinder.Visibility 1
+cylinder.Color 12
+cylinder.Rotation 270 0 270
+cylinder.Mother WorldVolume
+
+//Cone connecting the crystal to the middle cylinder
+//position found by doing -1.75 - 0.5 -10.75
+//Differences in height - the position
+//Everything is negative since I am building in the negative x
+Volume cone1
+cone1.Material Aluminium
+cone1.Shape cone 0.5 2.95 3.0 3.95 4.0
+cone1.Position -13.0 0.0 -2.54
+cone1.Visibility 1
+cone1.Color 12
+cone1.Rotation 270 0 270
+cone1.Mother WorldVolume
+
+//Volume of Cylinder in the middle
+//-0.5 - 3.75 -13.0
+Volume cylinder_middle
+cylinder_middle.Material Aluminium
+cylinder_middle.Shape TUBE 2.95 3.0 3.75 0. 360.0
+cylinder_middle.Position -17.25 0.0 -2.54
+cylinder_middle.Visibility 1
+cylinder_middle.Color 12
+cylinder_middle.Rotation 270 0 270
+cylinder_middle.Mother WorldVolume
+
+//Volume of PMT
+// -3.75-2.625-17.25
+Volume PMT
+PMT.Material Aluminium
+PMT.Shape BRIK 2.625 3.75 4.5
+PMT.Position -23.625 0.0 -2.54
+PMT.Visibility 1
+PMT.Color 12
+PMT.Mother WorldVolume
+
+//Volume of PMT inner
+// -3.725+2.60-18.375
+Volume PMT_inner
+PMT_inner.Material Air
+PMT_inner.Shape BRIK 2.60 3.725 4.475
+PMT_inner.Position 0.0 0.0 0.0
+PMT_inner.Visibility 1
+PMT_inner.Color 4
+PMT_inner.Mother PMT
+
+//Gaussian Detector Information
+Scintillator NaI_Tl_sci
+NaI_Tl_sci.DetectorVolume NaI_Tl_detector
+NaI_Tl_sci.SensitiveVolume NaI_Tl_detector
+#set low values
+NaI_Tl_sci.NoiseThreshold 20.0
+NaI_Tl_sci.TriggerThreshold 100.0
+#NaI_Tl_sci.EnergyResolution Gauss 66.2 66.2 2
+#NaI_Tl_sci.EnergyResolution Gauss 662 662 20.
+NaI_Tl_sci.FailureRate 0.0
+
+//Trigger Info
+Trigger NaI_Tl_Gauss
+NaI_Tl_Gauss.Veto false
+NaI_Tl_Gauss.TriggerByChannel true
+NaI_Tl_Gauss.Detector NaI_Tl_sci 1
