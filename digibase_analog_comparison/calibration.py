@@ -18,7 +18,6 @@ def spectrum_calibration(channel_width, energy_list, data_2_calibrate):
     fit_channel = []
     while i < len(energy_list):
         channel_max = np.argmax(data_2_calibrate)
-        print(channel_max)
         data_left = channel_max - channel_width
         data_right = channel_max + channel_width
         channel_max_list.append(channel_max)
@@ -59,9 +58,9 @@ def spectrum_calibration(channel_width, energy_list, data_2_calibrate):
     slope, intercept = np.polyfit(channel_number, energy, 1)
 
     abline_values = [slope * i + intercept for i in channel_number]
-    plt.plot(channel_number,energy, 'ro')
-    plt.plot(channel_number, abline_values, 'b')
-    plt.xlabel('Channel Number')
-    plt.ylabel('Energy [keV]')
-    plt.title('Best Fit Line')
+    #plt.plot(channel_number,energy, 'ro')
+    #plt.plot(channel_number, abline_values, 'b')
+    #plt.xlabel('Channel Number')
+    #plt.ylabel('Energy [keV]')
+    #plt.title('Best Fit Line')
     return slope, intercept
