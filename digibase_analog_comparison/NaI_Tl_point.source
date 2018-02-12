@@ -32,16 +32,28 @@ NaI_Tl_detector.Source NaI_Tl_detectorSource
 NaI_Tl_detectorSource.ParticleType      1
 NaI_Tl_detectorSource.Beam              PointSource 0.0648 187.96 0.0
 NaI_Tl_detectorSource.Spectrum          Mono 661.67
-NaI_Tl_detectorSource.Flux              311227
+NaI_Tl_detectorSource.Flux              338681
 
 NaI_Tl_detector.Source NaI_Tl_detectorSource2
 NaI_Tl_detectorSource2.ParticleType      1
 NaI_Tl_detectorSource2.Beam              PointSource 0.0648 187.96 0.0
 NaI_Tl_detectorSource2.Spectrum          Mono 1173.2
-NaI_Tl_detectorSource2.Flux              703547
+NaI_Tl_detectorSource2.Flux              209910
 
 NaI_Tl_detector.Source NaI_Tl_detectorSource3
 NaI_Tl_detectorSource3.ParticleType      1
 NaI_Tl_detectorSource3.Beam              PointSource 0.0648 187.96 0.0
 NaI_Tl_detectorSource3.Spectrum          Mono 1332.5
-NaI_Tl_detectorSource3.Flux              703547
+NaI_Tl_detectorSource3.Flux              209910
+
+NaI_Tl_detector.Source NaI_Tl_detectorSource4
+NaI_Tl_detectorSource4.ParticleType      1
+NaI_Tl_detectorSource4.Beam              PointSource 0.0648 187.96 0.0
+NaI_Tl_detectorSource4.Spectrum          Mono 122.1
+NaI_Tl_detectorSource4.Flux              25699
+
+NaI_Tl_detector.Source NaI_Tl_detectorSource5
+NaI_Tl_detectorSource5.ParticleType      1
+NaI_Tl_detectorSource5.Beam              PointSource 0.0648 187.96 0.0
+NaI_Tl_detectorSource5.Spectrum          Mono 136.5
+NaI_Tl_detectorSource5.Flux              25699
