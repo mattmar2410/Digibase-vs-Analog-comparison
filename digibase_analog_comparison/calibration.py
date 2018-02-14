@@ -1,4 +1,4 @@
-def spectrum_calibration(channel_width, energy_list, data_2_calibrate):
+def spectrum_calibration(channel_width, energy_list, data_2_calibrate, clean_left, clean_right):
     import numpy as np
     import matplotlib.pyplot as plt
     #from scipy.optimize import curve_fit
@@ -13,7 +13,19 @@ def spectrum_calibration(channel_width, energy_list, data_2_calibrate):
     the peak by removing 10 channels from the right and left of the peak.
     The code will then search for the next largest position.
     '''
+    y_counts = data_2_calibrate
 
+    list_data = np.array(y_counts).tolist()
+    iterator = clean_left
+    while iterator < (clean_right):
+        list_data[iterator] = 0
+        iterator += 1
+    '''
+    merging the data for the calibration
+    Also converting merged data into a list so channels can be
+    removed easier.
+    '''
+    data_2_calibrate = list_data
     i = 0; channel_max_list = []; gauss_x = []; gauss_y = []
     fit_channel = []
     while i < len(energy_list):
