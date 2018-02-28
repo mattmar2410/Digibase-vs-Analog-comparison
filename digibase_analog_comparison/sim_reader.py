@@ -38,7 +38,5 @@ def cosima_output(fname):
         counts, bin_edges = np.histogram(nrg, bins=1000)
         bin_centers = (bin_edges[1:]+bin_edges[:-1])/2
         counts, bin_edges = np.histogram(nrg, bins=np.linspace(0, max(energies)+100))
-        count_list.append(counts)
         bin_centers = (bin_edges[1:]+bin_edges[:-1])/2
-        bin_centers_list.append(bin_centers)
-    return bin_centers, counts
+    return nrg
